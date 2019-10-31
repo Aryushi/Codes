@@ -1,0 +1,65 @@
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        ListNode *temp=head;int c=0,K;ListNode * dummyi;ListNode *p;ListNode * dummyii;
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        
+        while(temp!=NULL){
+            c++;
+            temp=temp->next;
+        }
+        temp=head;
+        if(k==c){
+            return head;
+        }
+        if(k>c){
+            K=k%c;
+        }
+        else
+        {
+            K=k;
+        }
+        if(K==0){
+            return head;
+        }
+         if(K==1 && c==2){
+            head->next->next=head;
+            p=head->next;
+            head->next=NULL;
+             head=p;
+            return head;
+        }
+        if(c-K==1){
+            while(head->next->next!=NULL){
+                head=head->next;
+            }
+           head->next->next=temp;
+               dummyii=temp->next;
+            temp->next=NULL;
+           return dummyii;
+            
+        }
+        else{
+        while(c!=K){
+            c--;
+            if(c!=K)
+            { temp=temp->next;}
+            if(c==K){
+                temp=dummyi;
+            }
+            if(c==(K+1)){
+               dummyi=temp->next;
+                temp->next=NULL;
+            }
+        }
+        
+        ListNode *dummy=temp;
+        while(dummy->next!=NULL){
+            dummy=dummy->next;
+        }
+        dummy->next=head;
+        return temp;  }    
+    }
+};
